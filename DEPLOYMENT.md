@@ -27,10 +27,7 @@
    Production branch: main
    Build command: npm run build
    Build output directory: dist
-   Deploy command: (LEAVE EMPTY - DO NOT SET)
    ```
-
-   **IMPORTANT**: Do NOT set a deploy command. Cloudflare Pages handles deployment automatically after building.
 
 5. **Deploy**
    - Click **"Save and Deploy"**
@@ -48,7 +45,7 @@
 
 ### Option 2: Deploy via Wrangler CLI
 
-If you prefer using Wrangler locally instead of GitHub integration:
+If you prefer using Wrangler locally:
 
 1. **Install Wrangler Globally** (if not already installed)
    ```bash
@@ -76,8 +73,6 @@ If you prefer using Wrangler locally instead of GitHub integration:
    ```bash
    npm run build && wrangler pages deploy dist
    ```
-
-**Note**: This method doesn't use GitHub integration, so you won't get automatic deployments on push. Each deployment must be triggered manually via Wrangler CLI.
 
 ---
 
@@ -215,25 +210,10 @@ npm run preview
 
 ## Troubleshooting
 
-### Deploy Command Error
-**Error**: `It looks like you've run a Workers-specific command in a Pages project`
-
-**Solution**:
-1. Go to your Cloudflare Pages project settings
-2. Navigate to **Settings** → **Builds & deployments**
-3. Under **Build configurations**, make sure:
-   - Build command: `npm run build`
-   - Build output directory: `dist`
-   - **Deploy command: LEAVE EMPTY** (this is the issue!)
-4. Save and retry deployment
-
-For Cloudflare Pages with GitHub integration, deployment is automatic after the build. You should NOT have a deploy command set.
-
 ### Build Fails
 - Check Node.js version (should be 18+)
 - Ensure all dependencies are installed: `npm install`
 - Check build logs in Cloudflare dashboard
-- Verify `terser` is installed: `npm install -D terser`
 
 ### Images Not Showing
 - Verify images are in `/public/assets/images/`
