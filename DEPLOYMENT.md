@@ -29,6 +29,11 @@
    Build output directory: dist
    ```
 
+   **⚠️ CRITICAL**: Make sure there is **NO deploy command** set!
+   - If you see a "Deploy command" field, **LEAVE IT EMPTY**
+   - Do NOT add `npx wrangler deploy` or any other command
+   - Cloudflare Pages handles deployment automatically after build
+
 5. **Deploy**
    - Click **"Save and Deploy"**
    - Cloudflare will automatically build and deploy your site
@@ -210,10 +215,30 @@ npm run preview
 
 ## Troubleshooting
 
+### ❌ Deploy Command Error
+**Error**: `It looks like you've run a Workers-specific command in a Pages project`
+
+**Cause**: You accidentally set a deploy command in Cloudflare Pages settings. This is a common mistake!
+
+**Fix**:
+1. Go to your Cloudflare Pages dashboard
+2. Navigate to **Settings** → **Builds & deployments**
+3. Click **Edit configuration**
+4. Find the **Deploy command** field
+5. **DELETE everything in that field** - it should be completely empty
+6. Save the settings
+7. Go to **Deployments** and click **Retry deployment**
+
+**Why**: Cloudflare Pages automatically deploys after building. The `wrangler deploy` command is only for Workers, not Pages. When using GitHub integration with Pages, you only need:
+- ✅ Build command: `npm run build`
+- ✅ Build output directory: `dist`
+- ❌ Deploy command: **(LEAVE EMPTY)**
+
 ### Build Fails
 - Check Node.js version (should be 18+)
 - Ensure all dependencies are installed: `npm install`
 - Check build logs in Cloudflare dashboard
+- Verify `terser` is installed: `npm install -D terser`
 
 ### Images Not Showing
 - Verify images are in `/public/assets/images/`
