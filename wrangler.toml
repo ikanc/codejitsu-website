@@ -1,0 +1,3 @@
+# Cloudflare Pages configuration
+name = "codejitsu-website"
+pages_build_output_dir = "dist"
